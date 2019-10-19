@@ -31,7 +31,7 @@ router.get('/latest', new Auth().m, async (ctx, next) => {
             ['index', 'DESC']
         ]
     });
-    const art =await Art.getData(flow.art_id, flow.type);
+    const art = await Art.getData(flow.art_id, flow.type);
     // art.dataValues.index = flow.index
     art.setDataValue('index', flow.index);
     ctx.body = {
@@ -58,5 +58,12 @@ router.get('/latest', new Auth().m, async (ctx, next) => {
 //         body
 //     }
 // })
+
+/**
+ * 获取喜欢
+ */
+router.get('/:type/:id/favor', new Auth().m, async (ctx, next) => {
+//   const v=await new 
+});
 
 module.exports = router

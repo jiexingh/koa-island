@@ -24,6 +24,14 @@ const ApiScope = {
     SUPER_ADMIG: 32
 }
 
+const ArtType = {
+    Movie: 100,
+    Music: 200,
+    Sentence: 300,
+    Book: 400,
+    isThisType
+}
+
 module.exports = {
     LoginType,
     ApiScope

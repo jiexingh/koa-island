@@ -87,10 +87,13 @@ class NotEmptyValidator extends LinValidator {
 }
 
 function checkType(val) {
-    if (!vals.body.type) {
+    // 参数里面携带还是url 里面携带
+    let type = val.body.type || vals.path.type;
+    if (!type) {
         throw new Error('type is nessary');
     }
-    if (!LoginType.isThisType(vals.body.type)) {
+    type = parseInt(type)
+    if (!LoginType.isThisType(type)) {
         throw new Error('type is illegal');
     }
 }
@@ -102,10 +105,40 @@ class LikeValidator extends PositiveIntergerValidator {
     }
 }
 
+class SearchValidator extends LinValidator {
+    constructor() {
+        super();
+        this.q = [
+            new Rule('isLength', 'search key not allowed to be empty',
+                {
+                    min: 1,
+                    max: 16
+                })
+        ];
+        this.start = [
+            new Rule('isInt', 'start 不符合规范',
+                {
+                    min: 0,
+                    max: 60000
+                }),
+            new Rule('optional', '', 0)
+        ];
+        this.count = [
+            new Rule('isInt', 'count 不符合规范',
+                {
+                    min: 0,
+                    max: 20
+                }),
+            new Rule('optional', '', 20)
+        ]
+    }
+}
+
 module.exports = {
     PositiveIntergerValidator,
     RegisterValidator,
     TokenValidator,
     NotEmptyValidator,
-    LikeValidator
+    LikeValidator,
+    SearchValidator
 }

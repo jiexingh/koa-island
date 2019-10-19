@@ -36,6 +36,8 @@ router.post('/cancel', new Auth().m, async ctx => {
         v.get('body.type'),
         ctx.auth.uid);
     Success('cancel sucessful');
-})
+});
+
+
 
 module.exports = router
